@@ -1,4 +1,4 @@
-#include "mem/cache/replacement_policies/mr_clean_rp.hh"
+#include "mem/cache/replacement_policies/mrclean_rp.hh"
 
 #include <cassert>
 #include <memory>
