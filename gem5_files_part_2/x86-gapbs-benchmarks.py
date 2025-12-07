@@ -120,13 +120,21 @@ parser.add_argument(
     help="Replacement policy for L1 data cache",
 )
 
+# Added on 12/3/2025
+parser.add_argument(
+    "--l2-rp",
+    type=str,
+    default="TreePLRU",
+    choices=list(rp_class_map.keys()),
+    help="Replacement policy for L2 cache",
+)
 
 args = parser.parse_args()
 
 # Instantiate SimObjects
 l1i_rp_obj = rp_class_map[args.l1i_rp]()
 l1d_rp_obj = rp_class_map[args.l1d_rp]()
-
+l2_rp_obj = rp_class_map[args.l2_rp]()
 # Setting up all the fixed system parameters here
 # Caches: MESI Two Level Cache Hierarchy
 
@@ -146,6 +154,7 @@ cache_hierarchy = MESITwoLevelCacheHierarchy(
     l1d_rp=l1d_rp_obj, # Changed on 11/30/2025
     l1i_rp=l1i_rp_obj, # Changed on 11/30/2025
     num_l2_banks=2,
+    l2_rp=l2_rp_obj,
 )
 # Memory: Dual Channel DDR4 2400 DRAM device.
 # The X86 board only supports 3 GiB of main memory.
