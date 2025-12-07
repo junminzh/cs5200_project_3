@@ -7,9 +7,9 @@ mkdir -p ${SAVE_DIR}
 
 ARGS="--benchmark gapbs-cc-medium --l1i-rp LRU --l1d-rp TreePLRU"
 
-# policies=("Random" "LRU" "TreePLRU" "LIP" "MRU" "FIFO" "SecondChance")
+policies=("Random" "LRU" "TreePLRU" "LIP" "MRU" "FIFO" "SecondChance")
 # policies=("Random" "LRU")
-policies=("TreePLRU" "LIP" "MRU" "FIFO" "SecondChance")
+# policies=("TreePLRU" "LIP" "MRU" "FIFO" "SecondChance")
 for L2_rp in "${policies[@]}"; do
     echo "Running L1i-rp=LRU, L1d-rp=TreePLRU, L2-rp=${L2_rp}:"        
     ${GEM5_OPT} -d ${GEM5_DIR}/m5out ${PY_FILE} ${ARGS} --l2-rp ${L2_rp}
