@@ -1,0 +1,51 @@
+From 16515b27f557efc135a90aa2aeab9aa75b2cbbdd Mon Sep 17 00:00:00 2001
+From: Junmin Zhang <jzhang8@uccs.edu>
+Date: Sun, 7 Dec 2025 15:33:37 -0700
+Subject: [PATCH 8/8] Modify the shell scripts for Part 2 and 3
+
+---
+ cmd_part2.sh |  4 ++--
+ cmd_part3.sh | 11 -----------
+ 2 files changed, 2 insertions(+), 13 deletions(-)
+
+diff --git a/cmd_part2.sh b/cmd_part2.sh
+index 14d976c..45888ff 100755
+--- a/cmd_part2.sh
++++ b/cmd_part2.sh
+@@ -7,9 +7,9 @@ mkdir -p ${SAVE_DIR}
+ 
+ ARGS="--benchmark gapbs-cc-medium --l1i-rp LRU --l1d-rp TreePLRU"
+ 
+-# policies=("Random" "LRU" "TreePLRU" "LIP" "MRU" "FIFO" "SecondChance")
++policies=("Random" "LRU" "TreePLRU" "LIP" "MRU" "FIFO" "SecondChance")
+ # policies=("Random" "LRU")
+-policies=("TreePLRU" "LIP" "MRU" "FIFO" "SecondChance")
++# policies=("TreePLRU" "LIP" "MRU" "FIFO" "SecondChance")
+ for L2_rp in "${policies[@]}"; do
+     echo "Running L1i-rp=LRU, L1d-rp=TreePLRU, L2-rp=${L2_rp}:"        
+     ${GEM5_OPT} -d ${GEM5_DIR}/m5out ${PY_FILE} ${ARGS} --l2-rp ${L2_rp}
+diff --git a/cmd_part3.sh b/cmd_part3.sh
+index c00e368..8d37bcb 100755
+--- a/cmd_part3.sh
++++ b/cmd_part3.sh
+@@ -7,17 +7,6 @@ mkdir -p ${SAVE_DIR}
+ 
+ ARGS="--benchmark gapbs-cc-small --l1i-rp LRU --l1d-rp MrClean --l2-rp MrClean"
+ 
+-# policies=("Random" "LRU" "TreePLRU" "LIP" "MRU" "FIFO" "SecondChance")
+-# policies=("Random" "LRU")
+-# policies=("TreePLRU" "LIP" "MRU" "FIFO" "SecondChance")
+-# for L2_rp in "${policies[@]}"; do
+-#     echo "Running L1i-rp=LRU, L1d-rp=TreePLRU, L2-rp=MrClean"        
+-#     ${GEM5_OPT} -d ${GEM5_DIR}/m5out ${PY_FILE} ${ARGS} --l2-rp ${L2_rp}
+-    
+-#     echo "Storing config files:"
+-#     cp ${GEM5_DIR}/m5out/config.ini ${SAVE_DIR}/config-l1i-LRU-lid-TreePLRU-l2-${L2_rp}.ini
+-#     cp ${GEM5_DIR}/m5out/stats.txt ${SAVE_DIR}/stats-l1i-LRU-lid-TreePLRU-l2-${L2_rp}.txt
+-# done
+ echo "Running L1i-rp=LRU, L1d-rp=TreePLRU, L2-rp=MrClean:" 
+ ${GEM5_OPT} -d ${GEM5_DIR}/m5out ${PY_FILE} ${ARGS}
+ 
+-- 
+2.43.0
+
